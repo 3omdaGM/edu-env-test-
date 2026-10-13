@@ -41,12 +41,16 @@ const general = {
  id:'general-pre',title:'الاختبار القبلي العام',scope:'بيئة التدريب التعليمية',
  purpose:'يهدف الاختبار الحالي إلى قياس الجوانب المعرفية التي تتعلق ببعض مهارات دمج التكنولوجيا في التعليم، لدى أفراد عينة البحث.',
  total:80,multipleChoice:54,trueFalse:26,
+ questionSections:[
+  {type:'choice',title:'السؤال الأول: اختر الإجابة الصحيحة من بين الاختيارات الآتية',label:'السؤال الأول: اختر',count:54},
+  {type:'true-false',title:'السؤال الثاني: ضع علامة صح أو خطأ أمام العبارات الآتية',label:'السؤال الثاني: صح وخطأ',count:26},
+ ],
  instructions,
  questions:[...choiceQuestions,trueFalseQuestion],
  sourcePages:[5,6,7,8,9],
 };
 const lessonPre = {
- id:'lesson-1-pre',title:'التقويم القبلي للدرس الأول',scope:'الموديول الأول · مقدمة عن دمج التكنولوجيا في التعليم',
+ id:'lesson-1-pre',title:'الاختبار القبلي للدرس الأول',scope:'الموديول الأول · مقدمة عن دمج التكنولوجيا في التعليم',
  purpose:'يهدف الاختبار الحالي إلى قياس الجوانب المعرفية التي تتعلق ببعض مهارات دمج التكنولوجيا في التعليم، لدى أفراد عينة البحث.',
  total:9,multipleChoice:5,trueFalse:4,
  instructions,

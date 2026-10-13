@@ -99,3 +99,15 @@ button:disabled{opacity:.4;cursor:default}
  .assessment-stats{gap:8px}.assessment-stats>div{padding:10px 5px}.assessment-stats strong{font-size:23px}.assessment-stats span{font-size:11px}
  .question-options li{font-size:15px}.question-preview h2{font-size:16px}.activity-cards{grid-template-columns:1fr}
 }
+.assessment-structure{font-size:13px;line-height:1.8;color:#536b7d;margin:0 0 12px}
+.question-section-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.question-section-tabs button{background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 12px;text-align:right;color:var(--navy);font-size:13px;font-weight:600;line-height:1.7}
+.question-section-tabs button span{display:block;font-size:11px;color:#748797;font-weight:normal}
+.question-section-tabs button.selected{background:#eaf4f3;border-color:#72b4a9;color:var(--teal)}
+.question-section-heading{margin-bottom:14px}.question-section-heading h2{font-size:16px;line-height:1.8;color:var(--navy)}
+.question-section-heading p{font-size:11px;color:#748797;margin-top:4px}
+.question-local-number{color:var(--teal)}
+.section-nav a.lesson-pretest-link{padding:8px 10px;border:1px solid #b7d6d0;background:#f3f8f7;color:var(--teal);font-weight:600;margin-bottom:3px;line-height:1.6}
+.lesson-pretest-link>svg{flex-shrink:0}.section-nav a.lesson-pretest-link.selected{background:#dfefeb;border-color:#6fac9f}
+.lesson-actions{gap:12px;flex-wrap:wrap;justify-content:space-between}
+@media(max-width:700px){.question-section-tabs{gap:7px}.question-section-tabs button{padding:8px;font-size:11px}.question-section-heading h2{font-size:15px}.lesson-actions .button{flex:1 1 200px}.section-nav a.lesson-pretest-link{padding:7px 10px}}

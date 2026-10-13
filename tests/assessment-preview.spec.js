@@ -10,15 +10,26 @@ test('الاختبار العام يعرض وصف 80 سؤالًا والأسئل
  await expect(page.locator('.assessment-instructions li')).toHaveCount(5);
  await page.locator('.assessment-tabs').getByRole('link',{name:'الأسئلة المتاحة',exact:true}).click();
  await expect(page.locator('.question-preview h2')).toHaveCount(1);
+ await expect(page.locator('.question-section-heading h2')).toContainText('السؤال الأول: اختر');
+ await expect(page.locator('.question-local-number')).toHaveText('1. ');
+ await expect(page.locator('.question-section-tabs button')).toHaveCount(2);
  await expect(page.locator('.question-preview h2')).toContainText('جميع ما يأتي عدا');
  await expect(page.locator('.question-options li')).toHaveCount(4);
  await expect(page.getByRole('button',{name:'Previous'})).toBeDisabled();
  for(let i=0;i<4;i++)await page.getByRole('button',{name:'Next',exact:true}).click();
  await expect(page.locator('.question-preview h2')).toContainText('التقليدي فقط');
+ await expect(page.locator('.question-section-heading h2')).toContainText('السؤال الثاني: ضع علامة صح أو خطأ');
+ await expect(page.locator('.question-meta')).toContainText('السؤال الأول');
+ await expect(page.locator('.question-local-number')).toHaveText('1. ');
  await expect(page.locator('.question-options li')).toHaveCount(2);
  await expect(page.getByRole('button',{name:'Next',exact:true})).toBeDisabled();
  await page.getByRole('button',{name:'Previous'}).click();
  await expect(page.locator('.question-preview h2')).toContainText('متطلبات');
+ await expect(page.locator('.question-local-number')).toHaveText('4. ');
+ await page.getByRole('button',{name:'السؤال الثاني: صح وخطأ',exact:false}).click();
+ await expect(page.locator('.question-local-number')).toHaveText('1. ');
+ await page.getByRole('button',{name:'السؤال الأول: اختر',exact:false}).click();
+ await expect(page.locator('.question-preview h2')).toContainText('جميع ما يأتي عدا');
  await expect(page.locator('input,textarea')).toHaveCount(0);
  await expect(page.getByRole('button',{name:'Submit'})).toHaveCount(0);
  await expect(page.locator('.top-nav a[aria-current="page"]')).toHaveText('الاختبار القبلي');
@@ -27,6 +38,11 @@ test('الاختبار العام يعرض وصف 80 سؤالًا والأسئل
 
 test('تقويم الدرس القبلي والبعدي يعرضان وصف 9 أسئلة ويعيدان الأسئلة الثلاثة نفسها',async({page})=>{
  await page.setViewportSize({width:1366,height:768});
+ await page.goto('/#lesson/1/goals');
+ await expect(page.locator('.section-nav').getByRole('link',{name:'الاختبار القبلي للدرس الأول',exact:true})).toBeVisible();
+ await page.getByRole('link',{name:'عرض الاختبار القبلي للدرس الأول',exact:false}).click();
+ await expect(page.getByRole('heading',{level:1})).toHaveText('الاختبار القبلي للدرس الأول');
+ await expect(page.locator('.section-nav .lesson-pretest-link')).toHaveClass(/selected/);
  const captured=[];
  for(const phase of ['pre-test','post-test']){
   await page.goto(`/#lesson/1/${phase}`);
