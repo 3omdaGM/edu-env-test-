@@ -9,7 +9,7 @@ export const environment = {
   {name:'د. لمياء محمد الهادي',role:'مدرس تكنولوجيا التعليم، كلية التربية النوعية، جامعة الزقازيق'},
  ],
  announcement: ['زملائي / زميلاتي الأعزاء، من فضلكم قم بأداء الاختبار القبلي قبل دراسة المحتوى التعليمي.', 'سوف تجد آخر الأخبار والتعليمات الجديدة في لوحة الإعلانات.'],
- assets: {university:'/assets/university.png',faculty:null,modulesMap:'/assets/modules-map.png'},
+ assets: {university:'/assets/university.png',faculty:'/assets/faculty-logo.png',modulesMap:'/assets/modules-map.png'},
  sourcePages: [2,3,4,5],
 };
 export const modules = [

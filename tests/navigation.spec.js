@@ -12,6 +12,11 @@ test('التنقل الرئيسي يعرض المحتوى المتاح والم�
  ]){
   await page.getByRole('navigation').getByRole('link',{name:label,exact:true}).click();
   await expect(page.getByRole('heading',{level:1})).toContainText(heading);
+  const selected=page.getByRole('navigation').getByRole('link',{name:label,exact:true});
+  await expect(selected).toHaveAttribute('aria-current','page');
+  await expect(selected).toHaveCSS('color','rgb(181, 31, 60)');
+  await expect(selected).toHaveCSS('background-color','rgb(232, 242, 251)');
+  await expect(page.locator('.top-nav a.active')).toHaveCount(1);
   if(soon) await expect(page.locator('.coming-label')).toHaveText('Coming Soon');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  }
@@ -41,11 +46,15 @@ test('رحلة الموديول والدرس تعرض الأقسام الخمس�
 });
 
 test('الشاشات القصيرة على اللابتوب لا تتطلب تمريرًا والمحتوى الطويل متاح كاملًا',async({page})=>{
- await page.setViewportSize({width:1366,height:768});
- for(const route of ['home','environment-goals','announcements','modules','module/1/introduction','module/1/lessons','lesson/1/goals']){
-  await page.goto(`/#${route}`);await expect(page.getByRole('heading',{level:1})).toBeVisible();
-  expect(await page.evaluate(()=>document.documentElement.scrollHeight<=innerHeight),route).toBe(true);
+ for(const size of [{width:1366,height:768},{width:1280,height:640},{width:1536,height:700}]){
+  await page.setViewportSize(size);
+  for(const route of ['home','environment-goals','announcements','modules','module/1/introduction','module/1/lessons','lesson/1/goals']){
+   await page.goto(`/#${route}`);await expect(page.getByRole('heading',{level:1})).toBeVisible();
+   expect(await page.evaluate(()=>document.documentElement.scrollHeight<=innerHeight),`${route} at ${size.width}x${size.height}`).toBe(true);
+  }
  }
+ await page.setViewportSize({width:1366,height:768});
+ await expect(page.getByRole('img',{name:'شعار كلية التربية النوعية',exact:true})).toBeVisible();
  await page.goto('/#module/1/goals');await expect(page.locator('.content-list li').last()).toContainText('مرحلة التقويم');
  await page.locator('.content-list li').last().scrollIntoViewIfNeeded();await expect(page.locator('.content-list li').last()).toBeInViewport();
  await page.goto('/#home');await page.screenshot({path:'test-results/ui-home.png',fullPage:true});
